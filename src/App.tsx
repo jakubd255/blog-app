@@ -1,4 +1,5 @@
 import Layout from "./components/Layout";
+import AdminPage from "./pages/admin/AdminPage";
 import LoginPage from "./pages/admin/LoginPage";
 import HomePage from "./pages/HomePage";
 import PostFormPage from "./pages/PostFormPage";
@@ -16,8 +17,9 @@ const App: React.FC = () => {
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/posts/:id" element={<PostPage/>}/>
                     <Route path="/post-form" element={<PostFormPage/>}/>
-                    <Route path="/posts" element={<Navigate to="/"/>}/>
                     <Route path="/log-in" element={<LoginPage/>}/>
+                    <Route path="/admin" element={<AdminPage/>}/>
+                    <Route path="*" element={<Navigate to="/"/>}/>
                 </Routes>
             </Layout>
         </Router>

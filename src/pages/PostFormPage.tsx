@@ -1,13 +1,13 @@
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Switch} from "@/components/ui/switch";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import server from "@/constants/server";
 import PostArticle from "@/components/PostArticle";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 
 
@@ -19,16 +19,45 @@ const PostFormPage: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const handlePublish = () => {
-        server.post("/api/posts", {title: title, body: text}).then(() => {
-            navigate("/");
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    }
+    const [searchParams] = useSearchParams();
 
     const isDisabled: boolean = !text || !title;
+    const isEditMode = searchParams.get("id") ? true : false;
+
+    //If id query param - edit existing post
+    useEffect(() => {
+        const id = searchParams.get("id");
+        if(id) {
+            server.get("/api/posts/"+id).then(response => {
+                setTitle(response.data.title);
+                setText(response.data.body);
+            });
+        }
+    }, [searchParams])
+
+    const handlePublish = () => {
+        const id = searchParams.get("id");
+        const payload = {title: title, body: text};
+
+        //Edit chosen post
+        if(isEditMode) {
+            server.put("/api/posts/"+id, payload).then(() => {
+                navigate("/");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+        //Add new post
+        else {
+            server.post("/api/posts", payload).then(() => {
+                navigate("/");
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+    }
 
     return(
         <div className="flex flex-col gap-5 w-full">
@@ -74,7 +103,7 @@ const PostFormPage: React.FC = () => {
                     onClick={handlePublish} 
                     disabled={isDisabled}
                 >
-                    Publish
+                    {isEditMode ? "Edit" : "Publish"}
                 </Button>
             </div>
         </div>
