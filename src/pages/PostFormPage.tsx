@@ -7,7 +7,8 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import server from "@/constants/server";
 import PostArticle from "@/components/PostArticle";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
+import {PostStatus, PostSummary} from "@/types";
 
 
 
@@ -22,25 +23,34 @@ const PostFormPage: React.FC = () => {
     const [searchParams] = useSearchParams();
 
     const isDisabled: boolean = !text || !title;
-    const isEditMode = searchParams.get("id") ? true : false;
+
+    const [editedPost, setPost] = useState<PostSummary>();
 
     //If id query param - edit existing post
     useEffect(() => {
         const id = searchParams.get("id");
         if(id) {
             server.get("/api/posts/"+id).then(response => {
-                setTitle(response.data.title);
-                setText(response.data.body);
+                const {body, ...post} = response.data;
+
+                setTitle(post.title);
+                setText(body);
+                setPost(post);
             });
         }
     }, [searchParams])
 
-    const handlePublish = () => {
+    const handleSave = (status: PostStatus) => {
         const id = searchParams.get("id");
-        const payload = {title: title, body: text};
+
+        const payload = {
+            title: title, 
+            body: text, 
+            status: status
+        };
 
         //Edit chosen post
-        if(isEditMode) {
+        if(editedPost) {
             server.put("/api/posts/"+id, payload).then(() => {
                 navigate("/");
             })
@@ -98,13 +108,31 @@ const PostFormPage: React.FC = () => {
                         />
                     </>
                 )}
-                <Button 
-                    className="mt-[45px]" 
-                    onClick={handlePublish} 
-                    disabled={isDisabled}
-                >
-                    {isEditMode ? "Edit" : "Publish"}
-                </Button>
+                <div className="flex gap-2 mt-[45px] w-full">
+                    {(editedPost?.status == "DRAFT" || !editedPost) ? (
+                        <>
+                            <Button 
+                                onClick={() => handleSave("PUBLISHED")} 
+                                disabled={isDisabled}
+                            >
+                                Publish
+                            </Button>
+                            <Button
+                                onClick={() => handleSave("DRAFT")} 
+                                disabled={isDisabled}
+                            >
+                                {editedPost ? "Edit draft" : "Save draft"}
+                            </Button>
+                        </>
+                    ) : (
+                        <Button 
+                            onClick={() => handleSave("PUBLISHED")} 
+                            disabled={isDisabled}
+                        >
+                            Edit
+                        </Button>
+                    )}
+                </div>
             </div>
         </div>
     );

@@ -7,10 +7,10 @@ interface PostDateProps {
 }
 
 const PostDate: React.FC<PostDateProps> = ({date}) => {
-    const formattedDate = dayjs(date).format("D.MM YYYY");
+    const formattedDate = dayjs(date).format("D.MM.YYYY");
 
     return(
-        <span className="text-muted-foreground">
+        <span className="text-muted-foreground !w-[200px]">
             {formattedDate}
         </span>
     );

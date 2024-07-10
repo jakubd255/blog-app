@@ -7,11 +7,14 @@ export interface User {
     role: Role;
 }
 
+export type PostStatus = "DRAFT" | "PUBLISHED";
+
 export interface PostSummary {
     id: number;
     title: string;
     date: string;
     user: User;
+    status: PostStatus;
 }
 
 export interface Post extends PostSummary {
