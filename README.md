@@ -1,5 +1,6 @@
 # BlogApp
-Simple personal blog app written in React. Only admin can add posts. Currently in development.
+Blog app written in React. 
+Application provides viewing posts, account management, login system, writing posts (for admin and redactors) and admin panel.
 
 **Backend**: https://github.com/jakubd255/blog-app-backend
 
