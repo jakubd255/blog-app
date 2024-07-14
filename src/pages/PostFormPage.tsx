@@ -9,11 +9,16 @@ import server from "@/constants/server";
 import PostArticle from "@/components/PostArticle";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import {PostStatus, PostSummary} from "@/types";
+import {useAuth} from "@/provider/AuthProvider";
+import Error from "@/components/Error";
 
 
 
 const PostFormPage: React.FC = () => {
+    const {user} = useAuth();
+    
     const [previewMode, setMode] = useState<boolean>(false);
+    const [editedPost, setPost] = useState<PostSummary>();
 
     const [text, setText] = useState<string>("");
     const [title, setTitle] = useState<string>("");
@@ -24,7 +29,7 @@ const PostFormPage: React.FC = () => {
 
     const isDisabled: boolean = !text || !title;
 
-    const [editedPost, setPost] = useState<PostSummary>();
+    
 
     //If id query param - edit existing post
     useEffect(() => {
@@ -69,7 +74,7 @@ const PostFormPage: React.FC = () => {
         }
     }
 
-    return(
+    if(user?.role !== "ROLE_USER") return(
         <div className="flex flex-col gap-5 w-full">
             <div className="flex items-center space-x-2">
                 <Switch 
@@ -135,6 +140,9 @@ const PostFormPage: React.FC = () => {
                 </div>
             </div>
         </div>
+    );
+    else if(user) return(
+        <Error status={403} message="You don't have permission to this section"/>
     );
 }
 

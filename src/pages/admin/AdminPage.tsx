@@ -1,34 +1,35 @@
-import PostTable from "@/components/PostTable";
-import server from "@/constants/server";
-import {PostSummary} from "@/types";
-import {useEffect, useState} from "react";
+import Error from "@/components/Error";
+import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {useAuth} from "@/provider/AuthProvider";
+import {Link, Outlet, useLocation} from "react-router-dom";
 
 
 
 const AdminPage: React.FC = () => {
-    const [posts, setPosts] = useState<PostSummary[]>([]);
-    const [isLoaded, setLoaded] = useState<boolean>(false);
+    const location = useLocation();
+    const {user} = useAuth();
 
-    useEffect(() => {
-        server.get("/api/posts/all").then(response => {
-            setPosts(response.data);
-            setLoaded(true);
-        })
-    }, []);
-
-    const deletePost = (id: number) => {
-        server.delete("/api/posts/"+id).then(() => {
-            setPosts(posts => posts.filter(post => post.id !== id));
-        });
-    }
-    
-    if(isLoaded) return(
-        <div>
-            <h2>
-                Posts
-            </h2>
-            <PostTable posts={posts} deletePost={deletePost}/>
+    if(user?.role === "ROLE_ADMIN") return(
+        <div className="w-[800px]">
+            <Tabs defaultValue={location.pathname.split("/")[2]}>
+                <TabsList>
+                    <TabsTrigger value="posts" asChild>
+                        <Link to="posts">
+                            Posts
+                        </Link>
+                    </TabsTrigger>
+                    <TabsTrigger value="users">
+                        <Link to="users">
+                            Users
+                        </Link>
+                    </TabsTrigger>
+                </TabsList>
+            </Tabs>
+            <Outlet/>
         </div>
+    );
+    else if(user) return(
+        <Error status={403} message="You don't have permission to this section"/>
     );
 }
 

@@ -1,9 +1,13 @@
 import React from "react";
-import {TableHead, TableHeader, TableRow} from "./ui/table";
+import {TableHead, TableHeader, TableRow} from "@/components/ui/table";
 
 
 
-const PostTableHeader: React.FC = () => {
+interface PostTableHeaderProps {
+    showAuthor?: boolean;
+}
+
+const PostTableHeader: React.FC<PostTableHeaderProps> = ({showAuthor=false}) => {
     return(
         <TableHeader>
             <TableRow>
@@ -16,6 +20,11 @@ const PostTableHeader: React.FC = () => {
                 <TableHead>
                     Status
                 </TableHead>
+                {showAuthor ? (
+                    <TableHead>
+                        Author
+                    </TableHead>
+                ) : null}
                 <TableHead>
                     Actions
                 </TableHead>

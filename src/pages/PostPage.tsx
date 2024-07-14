@@ -1,10 +1,10 @@
 import PostArticle from "@/components/PostArticle";
-import PostDate from "@/components/PostDate";
 import server from "@/constants/server";
 import {Post} from "@/types";
 import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import Error from "@/components/Error";
+import PostDateAndAuthor from "@/components/PostDateAndAuthor";
 
 
 
@@ -26,10 +26,10 @@ const PostPage: React.FC = () => {
 
     if(post) return(
         <div className="flex flex-col gap-5">
-            <h2>
+            <h1>
                 {post.title}
-            </h2>
-            <PostDate date={post.date}/>
+            </h1>
+            <PostDateAndAuthor post={post}/>
             <div className="flex flex-wrap">
                 <PostArticle text={post.body}/>
             </div>

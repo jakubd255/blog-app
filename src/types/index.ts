@@ -1,10 +1,12 @@
-export type Role = "ROLE_USER" | "ROLE_ADMIN";
+export type Role = "ROLE_USER" | "ROLE_REDACTOR" | "ROLE_ADMIN";
 
 export interface User {
     id: number;
     name: string;
     email: string;
     role: Role;
+    profileImage: string;
+    bio?: string;
 }
 
 export type PostStatus = "DRAFT" | "PUBLISHED";

@@ -23,9 +23,11 @@ const HomePage: React.FC = () => {
                 Posts
             </h2>
             <ul className="flex flex-col gap-5">
-                {posts.map(post => (
+                {posts.length ? posts.map(post => (
                     <PostListElement post={post}/>
-                ))}
+                )) : (
+                    "There's no posts yet."
+                )}
             </ul>
         </div>
     );

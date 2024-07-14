@@ -11,9 +11,13 @@ const Layout: React.FC<LayoutProps> = ({children}) => {
     return(
         <>
             <Navbar/>
-            <div className="flex justify-center">
-                <div className="max-w-[700px] w-full mt-[50px] flex flex-col gap-5 items-center">
-                    {children}
+            <div className="flex flex-1">
+                <div className="flex justify-center w-full">
+                    <div className="flex flex-1 justify-center">
+                        <div className="max-w-[620px] w-full mt-[50px] flex flex-col gap-5 items-center flex-1 pb-[50px]">
+                            {children}
+                        </div>
+                    </div>
                 </div>
             </div>
         </>

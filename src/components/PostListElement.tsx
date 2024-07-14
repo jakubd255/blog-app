@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import PostDate from "./PostDate";
 import {PostSummary} from "@/types";
+import PostDateAndAuthor from "./PostDateAndAuthor";
 
 
 
@@ -14,7 +14,7 @@ const PostListElement: React.FC<PostListElementProps> = ({post}) => {
             <Link to={"/posts/"+post.id} className="text-2xl hover:underline">
                 {post.title}
             </Link>
-            <PostDate date={post.date}/>
+            <PostDateAndAuthor post={post}/>
         </li>
     )
 }

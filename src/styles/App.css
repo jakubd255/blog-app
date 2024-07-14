@@ -28,6 +28,10 @@ kbd > span {
   line-height: 1rem/* 16px */;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 
 
 .post-article {
