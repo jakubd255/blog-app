@@ -17,7 +17,7 @@ const UserPage: React.FC = () => {
 
     useEffect(() => {
         server.get("/api/users/"+id).then(response => {
-            setUser(response.data.content);
+            setUser(response.data);
         })
         .catch(error => {
             console.error(error);
@@ -25,7 +25,7 @@ const UserPage: React.FC = () => {
         });
 
         server.get("/api/posts/user/"+id).then(response => {
-            setPosts(response.data);
+            setPosts(response.data.content);
         });
     }, [id]);
 
