@@ -8,10 +8,13 @@ import {LogIn} from "lucide-react";
 import server from "@/constants/server";
 import {useNavigate} from "react-router-dom";
 import AuthPageLink from "@/components/AuthPageLink";
+import {APP_NAME} from "@/constants";
 
 
 
 const RegisterPage: React.FC = () => {
+    document.title = "Register to "+APP_NAME;
+
     const navigate = useNavigate();
 
     const formSchema = z.object({

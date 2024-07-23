@@ -4,10 +4,13 @@ import PasswordUpdate from "@/components/PasswordUpdate.tsx";
 import ProfileImageUpdate from "@/components/ProfileImageUpdate.tsx";
 import NameBioUpdate from "@/components/NameBioUpdate.tsx";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs.tsx";
+import {APP_NAME} from "@/constants";
 
 
 
 const AccountPage: React.FC = () => {
+    document.title = "Account settings | "+APP_NAME;
+
     const {user} = useAuth();
 
     if(user) return(

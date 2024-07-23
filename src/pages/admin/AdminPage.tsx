@@ -1,11 +1,14 @@
 import Error from "@/components/Error";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
+import {APP_NAME} from "@/constants";
 import {useAuth} from "@/provider/AuthProvider";
 import {Link, Outlet, useLocation} from "react-router-dom";
 
 
 
 const AdminPage: React.FC = () => {
+    document.title = "Admin panel | "+APP_NAME;
+    
     const location = useLocation();
     const {user} = useAuth();
 

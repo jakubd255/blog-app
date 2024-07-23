@@ -1,5 +1,6 @@
 import PageNavigation from "@/components/PageNavigation";
 import PostTable from "@/components/tables/posts/PostTable";
+import {APP_NAME} from "@/constants";
 import server from "@/constants/server";
 import {useAuth} from "@/provider/AuthProvider";
 import {usePosts} from "@/provider/PostsProvider";
@@ -10,6 +11,8 @@ import {useSearchParams} from "react-router-dom";
 
 
 const ReadactorPage: React.FC = () => {
+    document.title = "Redactor panel | "+APP_NAME;
+    
     const {user} = useAuth();
     const {setPosts} = usePosts();
     const [searchParams] = useSearchParams();

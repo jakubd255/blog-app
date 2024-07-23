@@ -7,6 +7,7 @@ import Error from "@/components/Error";
 import {imageUrl} from "@/util";
 import PostListElement from "@/components/PostListElement";
 import {Separator} from "@/components/ui/separator";
+import {APP_NAME} from "@/constants";
 
 
 
@@ -19,14 +20,15 @@ const UserPage: React.FC = () => {
     useEffect(() => {
         server.get("/api/users/"+id).then(response => {
             setUser(response.data);
+            document.title = response.data.name+" | "+APP_NAME;
+
+            server.get("/api/posts/user/"+id).then(response => {
+                setPosts(response.data.content);
+            });
         })
         .catch(error => {
             console.error(error);
             setError(error.response.status);
-        });
-
-        server.get("/api/posts/user/"+id).then(response => {
-            setPosts(response.data.content);
         });
     }, [id]);
 

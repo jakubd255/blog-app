@@ -1,4 +1,5 @@
 import PostListElement from "@/components/PostListElement";
+import {APP_NAME} from "@/constants";
 import server from "@/constants/server";
 import {PostSummary} from "@/types";
 import {useEffect, useState} from "react";
@@ -6,6 +7,8 @@ import {useEffect, useState} from "react";
 
 
 const HomePage: React.FC = () => {
+    document.title = APP_NAME;
+
     const [posts, setPosts] = useState<PostSummary[]>([]);
     const [isLoaded, setLoaded] = useState<boolean>(false);
 

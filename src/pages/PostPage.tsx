@@ -7,6 +7,7 @@ import Error from "@/components/Error";
 import PostDateAndAuthor from "@/components/PostDateAndAuthor";
 import PostTitle from "@/components/PostTitle";
 import BackHomeButton from "@/components/BackHomeButton";
+import {APP_NAME} from "@/constants";
 
 
 
@@ -19,6 +20,7 @@ const PostPage: React.FC = () => {
     useEffect(() => {
         server.get("/api/posts/"+id).then(response => {
             setPost(response.data);
+            document.title = response.data.title+" | "+APP_NAME;
         })
         .catch(error => {
             console.error(error);

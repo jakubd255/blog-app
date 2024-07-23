@@ -12,10 +12,13 @@ import {PostStatus, PostSummary} from "@/types";
 import {useAuth} from "@/provider/AuthProvider";
 import Error from "@/components/Error";
 import PostTitle from "@/components/PostTitle";
+import {APP_NAME} from "@/constants";
 
 
 
 const PostFormPage: React.FC = () => {
+    document.title = "Add post | "+APP_NAME;
+
     const {user} = useAuth();
     
     const [previewMode, setMode] = useState<boolean>(false);
