@@ -1,6 +1,6 @@
 import server from "@/constants/server";
 import {Role, User} from "@/types";
-import {createContext, ReactNode, useContext, useState} from "react";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 
 
 
@@ -15,6 +15,10 @@ export const usersContext = createContext<UsersContextType | null>(null);
 
 const UsersProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const [users, setUsers] = useState<User[]>([]);
+
+    useEffect(() => {
+        return () => setUsers([]);
+    }, []);
 
     const updateRole = (id: number, role: Role) => {
         const headers = {headers: {"Content-Type": "application/json"}};

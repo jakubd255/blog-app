@@ -11,7 +11,7 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         server.get("/api/posts").then(response => {
-            setPosts(response.data);
+            setPosts(response.data.content);
             setLoaded(true);
         })
     }, []);

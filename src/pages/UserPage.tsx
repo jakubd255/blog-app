@@ -17,7 +17,7 @@ const UserPage: React.FC = () => {
 
     useEffect(() => {
         server.get("/api/users/"+id).then(response => {
-            setUser(response.data);
+            setUser(response.data.content);
         })
         .catch(error => {
             console.error(error);

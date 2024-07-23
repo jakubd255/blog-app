@@ -22,3 +22,10 @@ export interface PostSummary {
 export interface Post extends PostSummary {
     body: string
 }
+
+export interface Page {
+    size: number;
+    number: number;
+    totalElements: number;
+    totalPages: number;
+}

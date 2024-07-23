@@ -1,6 +1,6 @@
 import server from "@/constants/server";
 import {PostSummary} from "@/types";
-import {createContext, ReactNode, useContext, useState} from "react";
+import {createContext, ReactNode, useContext, useEffect, useState} from "react";
 
 
 
@@ -15,10 +15,14 @@ export const postsContext = createContext<PostsContextType | null>(null);
 const PostsProvider: React.FC<{children: ReactNode}> = ({children}) => {
     const [posts, setPosts] = useState<PostSummary[]>([]);
 
+    useEffect(() => {
+        return () => setPosts([]);
+    }, []);
+
     const deletePost = (id: number) => {
         server.delete("/api/posts/"+id).then(() => {
             setPosts(posts => posts.filter(post => post.id !== id));
-        })
+        });
     }
 
     return(
