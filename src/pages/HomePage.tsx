@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
     
     if(isLoaded) return(
         <div className="flex flex-col gap-5 w-full">
-            <h2>
+            <h2 className="text-[35px]">
                 Posts
             </h2>
             <ul className="flex flex-col gap-5">

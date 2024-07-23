@@ -11,6 +11,7 @@ import {useNavigate, useSearchParams} from "react-router-dom";
 import {PostStatus, PostSummary} from "@/types";
 import {useAuth} from "@/provider/AuthProvider";
 import Error from "@/components/Error";
+import PostTitle from "@/components/PostTitle";
 
 
 
@@ -90,9 +91,7 @@ const PostFormPage: React.FC = () => {
             <div className="flex flex-col gap-3">
                 {previewMode ? (
                     <>
-                        <h2>
-                            {title}
-                        </h2>
+                        <PostTitle title={title}/>
                         <PostArticle text={text}/>
                     </>
                 ) : (

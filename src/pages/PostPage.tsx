@@ -2,9 +2,11 @@ import PostArticle from "@/components/PostArticle";
 import server from "@/constants/server";
 import {Post} from "@/types";
 import {useEffect, useState} from "react";
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import Error from "@/components/Error";
 import PostDateAndAuthor from "@/components/PostDateAndAuthor";
+import PostTitle from "@/components/PostTitle";
+import BackHomeButton from "@/components/BackHomeButton";
 
 
 
@@ -21,22 +23,15 @@ const PostPage: React.FC = () => {
         .catch(error => {
             console.error(error);
             setError(error.response.status);
-        })
+        });
     }, [id]);
 
     if(post) return(
         <div className="flex flex-col gap-5">
-            <h1>
-                {post.title}
-            </h1>
+            <PostTitle title={post.title}/>
             <PostDateAndAuthor post={post}/>
-            <div className="flex flex-wrap">
-                <PostArticle text={post.body}/>
-            </div>
-            
-            <Link to="/" className="hover:underline flex items-center gap-2 font-bold">
-                ← Go back home
-            </Link>
+            <PostArticle text={post.body}/>
+            <BackHomeButton/>
         </div>
     );
     else if(error === 404) {

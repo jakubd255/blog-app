@@ -6,6 +6,7 @@ import {useParams} from "react-router-dom";
 import Error from "@/components/Error";
 import {imageUrl} from "@/util";
 import PostListElement from "@/components/PostListElement";
+import {Separator} from "@/components/ui/separator";
 
 
 
@@ -31,17 +32,19 @@ const UserPage: React.FC = () => {
 
     if(user) return(
         <div className="w-full flex flex-col gap-8">
-            <div className="gap-5">
-                <div className="flex justify-center">
-                    <UserAvatar 
-                        username={user.name} 
-                        image={imageUrl(user.profileImage)}
-                        size="lg"
-                    />
+            <div className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2">
+                    <div className="flex justify-center">
+                        <UserAvatar 
+                            username={user.name} 
+                            image={imageUrl(user.profileImage)}
+                            size="lg"
+                        />
+                    </div>
+                    <h1 className="text-center">
+                        {user.name}
+                    </h1>
                 </div>
-                <h1 className="text-center">
-                    {user.name}
-                </h1>
                 <pre className="flex whitespace-pre-wrap font-sans text-xl">
                     {user.bio}
                 </pre>
@@ -49,9 +52,7 @@ const UserPage: React.FC = () => {
 
             {posts.length ? (
                 <div className="flex flex-col gap-5">
-                    <h2>
-                        Posts
-                    </h2>
+                    <Separator/>
                     <ul className="flex flex-col gap-5">
                         {posts.map(post => (
                             <PostListElement post={post}/>

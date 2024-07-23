@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
             <div className="flex justify-between items-center">
                 <div className="flex gap-4 items-center">
                     <Link to="/">
-                        <h1 className="scroll-m-20 text-2xl font-semibold tracking-tight hover:underline text-primary">
+                        <h1 className="scroll-m-20 text-3xl font-bold tracking-tight">
                             BlogApp
                         </h1>
                     </Link>

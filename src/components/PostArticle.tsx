@@ -4,8 +4,10 @@ interface PostArticleProps {
 
 const PostArticle: React.FC<PostArticleProps> = ({text}) => {
     return(
-        <article className="post-article" dangerouslySetInnerHTML={{__html: text}}>
-        </article>
+        <div className="flex flex-wrap">
+            <article className="post-article" dangerouslySetInnerHTML={{__html: text}}>
+            </article>
+        </div>
     )
 }
 
