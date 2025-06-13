@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+/*html {
   font-size: 16px; 
-}
+}*/
 
 @layer base {
   :root {
@@ -105,7 +105,7 @@ code {
 }
 
 article p, article ol, article ul, article blockquote {
-  @apply mb-7;
+  @apply mb-4;
 }
 
 article p:has(+ ul), article p:has(+ ol), article h1, article h2, article h3 {
@@ -122,4 +122,20 @@ article ul, article ol {
 
 .tiptap > *:last-child {
   margin-bottom: 0 !important;
+}
+
+article a {
+  @apply hover:underline text-blue-600 cursor-pointer
+}
+
+/*article ul[data-type="taskList"] {
+  @apply ml-0
+}*/
+
+article ul[data-type="taskList"] li {
+  @apply flex gap-2
+}
+
+article li ul {
+  @apply mb-0
 }

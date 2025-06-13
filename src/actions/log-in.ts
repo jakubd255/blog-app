@@ -16,7 +16,7 @@ const checkAdmin = async () => {
     const admin = await getAdmin();
     if(!admin) {
         const newAdmin = await createAdmin();
-        console.log("Admin has beeb created");
+        console.log("Admin has been created");
         return newAdmin;
     }
     else {

@@ -24,14 +24,14 @@ export default async function PostPage({params}: PostPageProps) {
     const post = await getPost({params});
 
     return(
-        <article className="flex flex-col gap-5 mb-10">
+        <div className="flex flex-col gap-5 mb-10">
             <h1 className="text-5xl">
                 {post.title}
             </h1>
             <PostTagsList tags={post.tags}/>
             <PostDate date={post.createdAt}/>
-            <div dangerouslySetInnerHTML={{__html: post.content}}>
-            </div>
+            <article dangerouslySetInnerHTML={{__html: post.content}}>
+            </article>
             <div className="flex justify-center">
                 <div>
                     <Button variant="ghost" asChild>
@@ -42,6 +42,6 @@ export default async function PostPage({params}: PostPageProps) {
                     </Button>
                 </div>
             </div>
-        </article>
+        </div>
     );
 }

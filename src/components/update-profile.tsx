@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { useActionState, useState } from "react";
 import { Button } from "./ui/button";
 import updateProfileAction from "@/actions/update-profile";
-import PostEditor from "./post-editor";
+import PostEditor from "./text-editor";
 import UpdateLinksForm from "./update-links-form";
 
 export default function UpdateProfile() {

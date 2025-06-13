@@ -6,7 +6,7 @@ import getSlug from "speakingurl";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import PostEditor from "./post-editor";
+import TextEditor from "./text-editor";
 import updatePostAction from "@/actions/update-post";
 import FormSubmitError from "./form-submit-error";
 import { Switch } from "./ui/switch";
@@ -97,7 +97,7 @@ export default function PostForm(props: PostFormProps) {
                 <Label>
                     Content
                 </Label>
-                <PostEditor text={content} onChange={setContent}/>
+                <TextEditor text={content} onChange={setContent}/>
                 <FormSubmitError errors={state?.errors?.content}/>
             </div>
             <div>
