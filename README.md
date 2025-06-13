@@ -1,5 +1,5 @@
 # NextJS Starter
-A simple blog starter built with Next.js, designed for personal blogging. 
+Simple blog starter built with Next.js, designed for personal blogging. 
 
 ## Features
 - Single user (admin) created on first log-in

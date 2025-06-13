@@ -15,11 +15,6 @@ const getPost = async ({params}: PostPageProps) => {
     return post;
 };
 
-/*export async function generateMetadata({params}: PostPageProps) {
-    const post = await getPost({params});
-    return {title: post.title}
-}*/
-
 export default async function PostPage({params}: PostPageProps) {
     const post = await getPost({params});
 
@@ -30,7 +25,7 @@ export default async function PostPage({params}: PostPageProps) {
             </h1>
             <PostTagsList tags={post.tags}/>
             <PostDate date={post.createdAt}/>
-            <article dangerouslySetInnerHTML={{__html: post.content}}>
+            <article className="flex flex-col" dangerouslySetInnerHTML={{__html: post.content}}>
             </article>
             <div className="flex justify-center">
                 <div>

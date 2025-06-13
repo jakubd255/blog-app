@@ -104,8 +104,12 @@ code {
   @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono
 }
 
-article p, article ol, article ul, article blockquote {
-  @apply mb-4;
+article p, article ol, article ul, article blockquote, article .node-image {
+  @apply mb-5;
+}
+
+article.flex img {
+  @apply mb-5;
 }
 
 article p:has(+ ul), article p:has(+ ol), article h1, article h2, article h3 {

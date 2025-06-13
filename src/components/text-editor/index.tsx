@@ -9,10 +9,7 @@ import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
-//import Image from "@tiptap/extension-image";
 import { ImageExtension } from "./image-extention";
-//import ImageResize from "tiptap-extension-resize-image";
-//import { ResizableImage } from "tiptap-resize-image";
 
 interface TextEditorProps {
     text: string;
@@ -33,8 +30,7 @@ export default function TextEditor({text, onChange}: TextEditorProps) {
             TaskItem.configure({
                 nested: true,
             }),
-            ImageExtension,
-            //ImageResize
+            ImageExtension
         ],
         immediatelyRender: false,
         content: text,
