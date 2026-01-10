@@ -4,8 +4,7 @@ import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
-import { useState } from "react";
-import useButtonRef from "@/lib/hooks/useButtonRef";
+import { useRef, useState } from "react";
 
 interface ImageDialogContentProps {
     editor: Editor;
@@ -13,12 +12,19 @@ interface ImageDialogContentProps {
 
 export default function ImageDialogContent({editor} : ImageDialogContentProps) {
     const [url, setUrl] = useState<string>("");
-    const {ref, click} = useButtonRef();
+    const ref = useRef<HTMLButtonElement>(null);
+
+    const setImage = (img: string) => {
+        editor.chain().focus().insertContent({
+            type: "figure",
+            content: [{type: "image", attrs: {src: img}}],
+        }).run();
+    }
 
     const setImageFromUrl = () => {
         if(url) {
-            editor.chain().focus().setImage({src: url}).run();
-            click();
+            setImage(url);
+            ref.current?.click();
         }
     }
 
@@ -28,11 +34,11 @@ export default function ImageDialogContent({editor} : ImageDialogContentProps) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 if(reader.result) {
-                    editor.chain().focus().setImage({src: reader.result as string}).run()
+                    setImage(reader.result as string);
                 }
             };
             reader.readAsDataURL(file);
-            click();
+            ref.current?.click();
         }
     }
 
@@ -55,11 +61,9 @@ export default function ImageDialogContent({editor} : ImageDialogContentProps) {
                             value={url} 
                             onChange={e => setUrl(e.target.value)}
                         />
-                        
-                            <Button onClick={setImageFromUrl} type="button">
-                                Submit
-                            </Button>
-                        
+                        <Button onClick={setImageFromUrl} type="button">
+                            Submit
+                        </Button>
                     </div>
                 </div>
                 <div className="flex gap-2 items-center">

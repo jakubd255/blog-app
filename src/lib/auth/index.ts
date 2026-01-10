@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { cache } from "react";
-import { addSession, deleteSession, getSession } from "../db/queries/sessions";
+import { addSession, deleteSession, getSession } from "../../db/queries/sessions";
 
 export const validateRequest = cache(async () => {
     const sessionId = parseInt((await cookies()).get("SESSION_ID")?.value || "0");

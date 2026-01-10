@@ -1,6 +1,6 @@
 import UserAvatar from "@/components/user-avatar";
 import UserLink from "@/components/user-link";
-import { getAdmin } from "@/lib/db/queries/users";
+import { getAdmin } from "@/db/queries/users";
 
 export default async function AboutPage() {
     const user = (await getAdmin())!;

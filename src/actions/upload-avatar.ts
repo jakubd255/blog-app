@@ -1,8 +1,8 @@
 "use server";
 
-import { getAdmin, updateUser } from "@/lib/db/queries/users";
+import { getAdmin, updateUser } from "@/db/queries/users";
 import { deleteFile, isLocalFile, uploadFile } from "@/lib/file-handler";
-import { actionFailure } from "@/lib/types/action-result";
+import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 
 export default async function uploadAvatarAction(_: unknown, data: FormData) {
@@ -23,6 +23,5 @@ export default async function uploadAvatarAction(_: unknown, data: FormData) {
 
     await updateUser(user.id, {profileImage: fileName});
 
-    //return actionSuccess({profileImage: fileName});
     redirect("/admin/profile");
 }

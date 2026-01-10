@@ -1,22 +1,22 @@
 import PostDate from "@/components/post-date";
 import PostTagsList from "@/components/post-tags-list";
 import { Button } from "@/components/ui/button";
-import { getPostBySlug } from "@/lib/db/queries/posts";
+import { getPostBySlug } from "@/db/queries/posts";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface PostPageProps {
     params: Promise<{slug: string}>
 }
 
-const getPost = async ({params}: PostPageProps) => {
-    const slug = (await params).slug;
-    const post = (await getPostBySlug(slug))!;
-    return post;
-};
-
 export default async function PostPage({params}: PostPageProps) {
-    const post = await getPost({params});
+    const {slug} = await params;
+
+    const post = await getPostBySlug(slug);
+    if(!post) {
+        notFound();
+    }
 
     return(
         <div className="flex flex-col gap-5 mb-10">

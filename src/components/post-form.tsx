@@ -1,48 +1,38 @@
 "use client"
 
-import addPostAction from "@/actions/add-post";
 import { useActionState, useState } from "react";
 import getSlug from "speakingurl";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import TextEditor from "./text-editor";
-import updatePostAction from "@/actions/update-post";
 import FormSubmitError from "./form-submit-error";
 import { Switch } from "./ui/switch";
 import { Tag, TagInput } from "emblor";
+import { Post } from "@/lib/types";
+import upsertPostAction from "@/actions/upsert-post";
 
 interface PostFormProps {
-    title: string;
-    slug: string;
-    content: string;
-    mode: string;
-    isPublished: boolean;
-    tags: Tag[];
-    id?: number;
+    post?: Post;
+    editMode?: boolean;
 }
 
-export default function PostForm(props: PostFormProps) {
-    const [title, setTitle] = useState<string>(props.title);
-    const [slug, setSlug] = useState<string>(props.slug);
-    const [content, setContent] = useState<string>(props.content);
-    const [isPublished, setPublished] = useState<boolean>(props.isPublished);
-    const [tags, setTags] = useState<Tag[]>(props.tags);
+export default function PostForm({post, editMode=false}: PostFormProps) {
+    const [title, setTitle] = useState<string>(post?.title ?? "");
+    const [slug, setSlug] = useState<string>(post?.slug ?? "");
+    const [content, setContent] = useState<string>(post?.content ?? "");
+    const [isPublished, setPublished] = useState<boolean>(post?.isPublished ?? true);
+    const [tags, setTags] = useState<Tag[]>(post?.tags?.map(tag => ({id: tag, text: tag})) ?? []);
     const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
 
     const handleSetSlug = () => setSlug(getSlug(title));
 
-    const handleKeyDown = (event: any) => {
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLFormElement>) => {
         if(event.key === "Enter") event.preventDefault();
     };
 
-    const [state, action, pending] = useActionState(async () => {
-        if(props.mode === "EDIT" && props.id) {
-            return await updatePostAction(props.id, title, slug, content, isPublished, tags);
-        }
-        else {
-            return await addPostAction(title, slug, content, isPublished, tags);
-        }
+    const [state, action] = useActionState(async () => {
+        return upsertPostAction(post?.id ?? null, title, slug, content, isPublished, tags);
     }, undefined);
 
     return(
@@ -55,7 +45,10 @@ export default function PostForm(props: PostFormProps) {
                 <Label>
                     Title
                 </Label>
-                <Input value={title} onChange={e => setTitle(e.target.value)}/>
+                <Input 
+                    value={title} 
+                    onChange={e => setTitle(e.target.value)} 
+                />
                 <FormSubmitError errors={state?.errors?.title}/>
             </div>
             <div>
@@ -63,7 +56,11 @@ export default function PostForm(props: PostFormProps) {
                     Slug
                 </Label>
                 <div className="flex gap-2">
-                    <Input value={slug} onChange={e => setSlug(e.target.value)}/>
+                    <Input 
+                        value={slug} 
+                        onChange={e => setSlug(e.target.value)} 
+                        name="slug"
+                    />
                     <Button variant="outline" onClick={handleSetSlug} type="button">
                         Generate
                     </Button>
@@ -91,18 +88,24 @@ export default function PostForm(props: PostFormProps) {
                 <Label>
                     Is published
                 </Label>
-                <Switch checked={isPublished} onCheckedChange={value => setPublished(value)}/>
+                <Switch 
+                    checked={isPublished} 
+                    onCheckedChange={value => setPublished(value)}
+                />
             </div>
             <div>
                 <Label>
                     Content
                 </Label>
-                <TextEditor text={content} onChange={setContent}/>
+                <TextEditor 
+                    text={content} 
+                    onChange={setContent} 
+                />
                 <FormSubmitError errors={state?.errors?.content}/>
             </div>
             <div>
                 <Button type="submit">
-                    {props.mode === "EDIT" ? "Update" : "Publish"}
+                    {editMode ? "Update" : "Publish"}
                 </Button>
             </div>
         </form>

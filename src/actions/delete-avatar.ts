@@ -1,8 +1,8 @@
 "use server";
 
-import { getAdmin, updateUser } from "@/lib/db/queries/users";
+import { getAdmin, updateUser } from "@/db/queries/users";
 import { deleteFile, isLocalFile } from "@/lib/file-handler";
-import { actionFailure } from "@/lib/types/action-result";
+import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 
 export default async function deleteAvatarAction() {
@@ -16,6 +16,5 @@ export default async function deleteAvatarAction() {
     }
     await updateUser(user.id, {profileImage: null});
 
-    //return actionSuccess();
     redirect("/admin/profile");
 }

@@ -22,7 +22,7 @@ export interface PaginationWithLinksProps {
   };
   totalCount: number;
   pageSize?: number;
-  page: number;
+  page?: number;
   pageSearchParam?: string;
 }
 
@@ -42,7 +42,7 @@ export function PaginationWithLinks({
   pageSizeSelectOptions,
   pageSize = PAGE_SIZE,
   totalCount,
-  page,
+  page = 1,
   pageSearchParam,
 }: PaginationWithLinksProps) {
   const router = useRouter();
@@ -153,18 +153,18 @@ export function PaginationWithLinks({
           <PaginationItem>
             <PaginationPrevious
               href={buildLink(Math.max(page - 1, 1))}
-              aria-disabled={page === 1}
-              tabIndex={page === 1 ? -1 : undefined}
-              className={page === 1 ? "pointer-events-none opacity-50" : undefined}
+              aria-disabled={page == 1}
+              tabIndex={page == 1 ? -1 : undefined}
+              className={page == 1 ? "pointer-events-none opacity-50" : undefined}
             />
           </PaginationItem>
           {renderPageNumbers()}
           <PaginationItem>
             <PaginationNext
               href={buildLink(Math.min(page + 1, totalPageCount))}
-              aria-disabled={page === totalPageCount}
-              tabIndex={page === totalPageCount ? -1 : undefined}
-              className={page === totalPageCount ? "pointer-events-none opacity-50" : undefined}
+              aria-disabled={page == totalPageCount}
+              tabIndex={page == totalPageCount ? -1 : undefined}
+              className={page == totalPageCount ? "pointer-events-none opacity-50" : undefined}
             />
           </PaginationItem>
         </PaginationContent>

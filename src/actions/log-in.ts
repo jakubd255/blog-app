@@ -2,8 +2,8 @@
 
 import { createSession } from "@/lib/auth";
 import { validatePassword } from "@/lib/auth/password";
-import { createAdmin, getAdmin } from "@/lib/db/queries/users";
-import { actionFailure } from "@/lib/types/action-result";
+import { createAdmin, getAdmin } from "@/db/queries/users";
+import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 

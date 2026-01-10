@@ -9,7 +9,14 @@ import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import TaskItem from "@tiptap/extension-task-item";
 import TaskList from "@tiptap/extension-task-list";
-import { ImageExtension } from "./image-extention";
+import { FigureImage } from "./figure-image";
+import Superscript from "@tiptap/extension-superscript";
+import Subscript from "@tiptap/extension-subscript";
+import { Color } from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
+import { TextStyle } from "@tiptap/extension-text-style";
+import { Figure } from "./figure";
+import { Figcaption } from "./figcaption";
 
 interface TextEditorProps {
     text: string;
@@ -21,6 +28,8 @@ export default function TextEditor({text, onChange}: TextEditorProps) {
         extensions: [
             StarterKit, 
             Underline, 
+            Superscript,
+            Subscript,
             TextAlign.configure({
                 types: ["heading", "paragraph", "image"],
                 defaultAlignment: "left"
@@ -30,7 +39,12 @@ export default function TextEditor({text, onChange}: TextEditorProps) {
             TaskItem.configure({
                 nested: true,
             }),
-            ImageExtension
+            FigureImage, Figure, Figcaption,
+            TextStyle,
+            Color,
+            Highlight.configure({
+                multicolor: true,
+            })
         ],
         immediatelyRender: false,
         content: text,

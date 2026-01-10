@@ -1,7 +1,7 @@
 import PostsTable from "@/components/posts-table";
 import { Button } from "@/components/ui/button";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-links";
-import { getPosts } from "@/lib/db/queries/posts";
+import { getPosts } from "@/db/queries/posts";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 

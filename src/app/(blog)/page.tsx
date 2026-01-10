@@ -1,14 +1,14 @@
 import PostListElement from "@/components/post-list-element";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-links";
 import { Separator } from "@/components/ui/separator";
-import { getPublishedPosts } from "@/lib/db/queries/posts";
+import { getPublishedPosts } from "@/db/queries/posts";
 
 interface MainPageProps {
     searchParams: Promise<{page?: number}>;
 }
 
 export default async function MainPage({searchParams}: MainPageProps) {
-    const page = (await searchParams).page ?? 1;
+    const {page} = await searchParams;
     const {posts, count} = await getPublishedPosts(page);
 
     return(

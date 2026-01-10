@@ -1,21 +1,14 @@
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { deletePostById } from "@/lib/db/queries/posts";
-import { redirect } from "next/navigation";
 import { Button } from "./ui/button";
 import { Trash2 } from "lucide-react";
 import { Post } from "@/lib/types";
+import deletePostAction from "@/actions/delete-post";
 
 interface PostDeleteDialogProps {
     post: Post;
 }
 
 export default function PostDeleteDialog({post}: PostDeleteDialogProps) {
-    const handleDeletePost = async () => {
-        "use server"
-        await deletePostById(post.id);
-        redirect("/admin/posts");
-    }
-
     return(
         <Dialog>
             <DialogTrigger asChild>
@@ -36,7 +29,10 @@ export default function PostDeleteDialog({post}: PostDeleteDialogProps) {
                             Cancel
                         </Button>
                     </DialogClose>
-                    <Button variant="destructive" onClick={handleDeletePost}>
+                    <Button 
+                        variant="destructive" 
+                        onClick={deletePostAction.bind(null, post.id)}
+                    >
                         Delete
                     </Button>
                 </DialogFooter>

@@ -17,7 +17,7 @@ export default function PostsTableActions({post}: PostsTableActionsProps) {
                 </Link>
             </Button>
             <Button variant="outline" size="icon" asChild>
-                <Link href={`/admin/posts/editor?postId=${post.id}`}>
+                <Link href={`/admin/posts/editor/${post.id}`}>
                     <Pencil className="w-4 h-4"/>
                 </Link>
             </Button>

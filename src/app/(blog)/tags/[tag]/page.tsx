@@ -1,7 +1,7 @@
 import PostListElement from "@/components/post-list-element";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-links";
 import { Separator } from "@/components/ui/separator";
-import { getPostsByTag } from "@/lib/db/queries/posts";
+import { getPostsByTag } from "@/db/queries/posts";
 
 interface TagPageProps {
     params: Promise<{tag: string}>;
@@ -9,9 +9,9 @@ interface TagPageProps {
 }
 
 export default async function TagPage({params, searchParams}: TagPageProps) {
-    const tag = (await params).tag;
-    const page = (await searchParams).page ?? 1;
-    const {posts, count} = (await getPostsByTag(tag, page))!;
+    const {tag} = await params;
+    const {page} = await searchParams;
+    const {posts, count} = await getPostsByTag(tag, page);
 
     return(
         <div className="flex flex-col gap-4">

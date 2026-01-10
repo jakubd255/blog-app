@@ -1,8 +1,8 @@
 "use server"
 
 import { validatePassword } from "@/lib/auth/password";
-import { getAdmin, updateUser } from "@/lib/db/queries/users";
-import { actionFailure } from "@/lib/types/action-result";
+import { getAdmin, updateUser } from "@/db/queries/users";
+import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
