@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { Link } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";

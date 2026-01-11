@@ -5,9 +5,10 @@ Simple blog starter built with Next.js, designed for personal blogging.
 - Single user (admin) created on first log-in
 - Admin dashboard for managing profile and posts
 - WYSIWYG text editor for writing posts with support for:
-    - Regular text and headnings (H1 - H3)
+    - Regular text and headings (H1 - H3)
     - <b>Bold</b>, <i>Italic</i>, <u>Underline</u>, <del>Strikethrough</del>
     - Text alignment (left, center, right, justify)
+    - Text colors and highlights
     - Bullet, numbered and to-do lists
     - Block quotes
     - Links
@@ -15,7 +16,7 @@ Simple blog starter built with Next.js, designed for personal blogging.
 
 ## Tech Stack
 - NextJS
-- TypeScipt
+- TypeScript
 - Tailwind CSS
 - Shadcn UI
 - Tiptap

@@ -12,12 +12,10 @@ export default function LinkPopoverContent({editor}: LinkPopoverContentProps) {
     const [url, setUrl] = useState<string>(editor.getAttributes("link").href);
 
     const setLink = () => {
-        //If empty
         if(!url) {
             editor.chain().focus().extendMarkRange("link").unsetLink().run()
             return;
         }
-
         editor.chain().focus().extendMarkRange("link").setLink({href: url}).run();
     }
 

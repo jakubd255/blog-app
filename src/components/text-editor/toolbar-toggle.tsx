@@ -1,13 +1,15 @@
+import { ReactNode } from "react";
 import { Toggle } from "../ui/toggle";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 interface ToolbarToggleProps {
+    children: ReactNode;
     onClick: () => void;
     pressed: boolean;
     label: string;
 }
 
-export default function ToolbarToggle({children, onClick, pressed, label}: React.PropsWithChildren<ToolbarToggleProps>) {
+export default function ToolbarToggle({children, onClick, pressed, label}: ToolbarToggleProps) {
     return(
         <Tooltip>
             <TooltipTrigger asChild>

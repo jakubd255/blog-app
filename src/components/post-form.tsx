@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useActionState, useState } from "react";
 import getSlug from "speakingurl";
@@ -31,9 +31,7 @@ export default function PostForm({post, editMode=false}: PostFormProps) {
         if(event.key === "Enter") event.preventDefault();
     };
 
-    const [state, action] = useActionState(async () => {
-        return upsertPostAction(post?.id ?? null, title, slug, content, isPublished, tags);
-    }, undefined);
+    const [state, action] = useActionState(upsertPostAction.bind(null, post?.id ?? null, title, slug, content, isPublished, tags), undefined);
 
     return(
         <form 
@@ -61,7 +59,7 @@ export default function PostForm({post, editMode=false}: PostFormProps) {
                         onChange={e => setSlug(e.target.value)} 
                         name="slug"
                     />
-                    <Button variant="outline" onClick={handleSetSlug} type="button">
+                    <Button variant="outline" onClick={handleSetSlug}>
                         Generate
                     </Button>
                 </div>
@@ -97,10 +95,7 @@ export default function PostForm({post, editMode=false}: PostFormProps) {
                 <Label>
                     Content
                 </Label>
-                <TextEditor 
-                    text={content} 
-                    onChange={setContent} 
-                />
+                <TextEditor text={content} onChange={setContent}/>
                 <FormSubmitError errors={state?.errors?.content}/>
             </div>
             <div>

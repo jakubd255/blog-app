@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useActionState } from "react";
 import { Label } from "./ui/label";
@@ -25,16 +25,16 @@ export default function LoginForm() {
                             <Label htmlFor="email">
                                 E-mail
                             </Label>
-                            <Input type="email" name="email" id="email"/>
+                            <Input type="email" name="email"/>
                         </div>
                         <div>
                             <Label htmlFor="password">
                                 Password
                             </Label>
-                            <Input type="password" name="password" id="password"/>
+                            <Input type="password" name="password"/>
                         </div>
                     </div>
-                    <Button>
+                    <Button type="submit">
                         <LogIn className="mr-2"/>
                         Log in
                     </Button>

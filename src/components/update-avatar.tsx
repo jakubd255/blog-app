@@ -2,7 +2,7 @@
 
 import UserAvatar from "./user-avatar";
 import UploadAvatarForm from "./upload-avatar-form";
-import DeleteAvatarForm from "./delete-avatar-form";
+import DeleteAvatarDialogForm from "./delete-avatar-dialog-form";
 import { useSession } from "./providers/session-provider";
 
 export default function UpdateAvatar() {
@@ -13,7 +13,7 @@ export default function UpdateAvatar() {
             <UserAvatar user={user} size="xl"/>
             <UploadAvatarForm/>
             {user.profileImage && (
-                <DeleteAvatarForm/>
+                <DeleteAvatarDialogForm/>
             )}
         </div>
     );

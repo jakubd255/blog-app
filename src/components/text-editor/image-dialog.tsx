@@ -1,8 +1,5 @@
-/* eslint-disable jsx-a11y/alt-text */
-
 import { type Editor } from "@tiptap/react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Toggle } from "../ui/toggle";
 import { Image } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";

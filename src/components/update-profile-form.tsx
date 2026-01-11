@@ -7,11 +7,10 @@ import { useActionState, useState } from "react";
 import { Button } from "./ui/button";
 import updateProfileAction from "@/actions/update-profile";
 import PostEditor from "./text-editor";
-import UpdateLinksForm from "./update-links-form";
+import LinksInput from "./links-input";
 
-export default function UpdateProfile() {
+export default function UpdateProfileForm() {
     const {user} = useSession();
-
     const [name, setName] = useState<string>(user.name);
     const [bio, setBio] = useState<string>(user.bio || "");
     const [links, setLinks] = useState<string[]>(user.links || []);
@@ -38,7 +37,7 @@ export default function UpdateProfile() {
                 <Label>
                     Links
                 </Label>
-                <UpdateLinksForm links={links} onChange={setLinks}/>
+                <LinksInput links={links} onChange={setLinks}/>
             </div>
             <div>
                 <Button type="submit">

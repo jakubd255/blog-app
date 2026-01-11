@@ -1,7 +1,7 @@
 import PostListElement from "@/components/post-list-element";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-links";
 import { Separator } from "@/components/ui/separator";
-import { getPublishedPosts } from "@/db/queries/posts";
+import { getCachedPublishedPosts } from "@/lib/cache/posts";
 
 interface MainPageProps {
     searchParams: Promise<{page?: number}>;
@@ -9,7 +9,7 @@ interface MainPageProps {
 
 export default async function MainPage({searchParams}: MainPageProps) {
     const {page} = await searchParams;
-    const {posts, count} = await getPublishedPosts(page);
+    const {posts, count} = await getCachedPublishedPosts(page);
 
     return(
         <div className="flex flex-col gap-4">

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { TooltipProvider } from "../ui/tooltip";
 import { useEditor, EditorContent } from "@tiptap/react";

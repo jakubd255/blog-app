@@ -1,13 +1,15 @@
 "use server";
 
-import { getAdmin, updateUser } from "@/db/queries/users";
+import { updateUser } from "@/db/queries/users";
 import { actionFailure } from "@/lib/action-result";
+import { validateRequest } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z.object({
     name: z.string().min(3),
-    bio: z.string().nullable()
+    bio: z.string().nullable(),
+    links: z.array(z.string()).nullable()
 });
 
 export default async function updateProfileAction(name: string, bio: string, links: string[]) {
@@ -17,7 +19,7 @@ export default async function updateProfileAction(name: string, bio: string, lin
         return actionFailure(validationResult.error?.flatten().fieldErrors);
     }
 
-    const user = await getAdmin();
+    const {user} = await validateRequest();
     if(!user) {
         return actionFailure();
     }

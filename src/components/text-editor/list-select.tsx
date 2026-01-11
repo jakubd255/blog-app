@@ -1,5 +1,5 @@
 import { type Editor } from "@tiptap/react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { List, ListOrdered, ListTodo } from "lucide-react";
 
@@ -67,24 +67,6 @@ export default function ListSelect({editor}: ListSelectProps) {
                         </div>
                     </SelectItem>
                 ))}
-                {/*<SelectItem value="bulletList">
-                    <div className="flex items-center">
-                        <List className="w-4 h-4 mr-2"/>
-                        Bullet list
-                    </div>
-                </SelectItem>
-                <SelectItem value="orderedList">
-                    <div className="flex items-center">
-                        <ListOrdered className="w-4 h-4 mr-2"/>
-                        Ordered list
-                    </div>
-                </SelectItem>
-                <SelectItem value="taskList">
-                    <div className="flex items-center">
-                        <ListTodo className="w-4 h-4 mr-2"/>
-                        Task list
-                    </div>
-                </SelectItem>*/}
             </SelectContent>
         </Select>
     )

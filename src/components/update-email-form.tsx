@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -10,13 +10,7 @@ import FormSubmitError from "./form-submit-error";
 
 export default function UpdateEmailForm() {
     const {user} = useSession();
-
-    const [email, setEmail] = useState<string>(user.email);
-    const [password, setPassword] = useState<string>("");
-
-    const [state, action] = useActionState(async () => {
-        return await updateEmailAction(email, password);
-    }, undefined);
+    const [state, action] = useActionState(updateEmailAction, {email: user.email});
 
     return(
         <form action={action} className="flex flex-col gap-2">
@@ -24,17 +18,17 @@ export default function UpdateEmailForm() {
                 <Label>
                     Email
                 </Label>
-                <Input type="email" value={email} onChange={e => setEmail(e.target.value)}/>
+                <Input type="email" name="email" defaultValue={state?.email}/>
                 <FormSubmitError errors={state?.errors?.email}/>
             </div>
             <div>
                 <Label>
                     Password
                 </Label>
-                <Input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                <Input type="password" name="password"/>
                 <FormSubmitError errors={state?.errors?.password}/>
             </div>
-            <Button>
+            <Button type="submit">
                 Update email
             </Button>
         </form>

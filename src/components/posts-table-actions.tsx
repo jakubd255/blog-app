@@ -1,8 +1,8 @@
 import { Post } from "@/lib/types";
-import { Eye, Pencil, Trash2 } from "lucide-react";
+import { Eye, Pencil } from "lucide-react";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import PostDeleteDialog from "./post-delete-dialog";
+import PostDeleteDialogForm from "./post-delete-dialog-form";
 
 interface PostsTableActionsProps {
     post: Post;
@@ -21,7 +21,7 @@ export default function PostsTableActions({post}: PostsTableActionsProps) {
                     <Pencil className="w-4 h-4"/>
                 </Link>
             </Button>
-            <PostDeleteDialog post={post}/>
+            <PostDeleteDialogForm post={post}/>
         </>
     );
 }

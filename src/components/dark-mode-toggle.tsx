@@ -1,18 +1,13 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Monitor, Moon, Sun } from "lucide-react"
+import * as React from "react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Monitor, Moon, Sun } from "lucide-react";
 
 export function DarkModeToggle() {
-    const  {setTheme} = useTheme()
+    const  {setTheme} = useTheme();
 
     return(
         <DropdownMenu>

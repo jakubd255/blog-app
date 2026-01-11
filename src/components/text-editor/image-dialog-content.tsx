@@ -10,7 +10,7 @@ interface ImageDialogContentProps {
     editor: Editor;
 }
 
-export default function ImageDialogContent({editor} : ImageDialogContentProps) {
+export default function ImageDialogContent({editor}: ImageDialogContentProps) {
     const [url, setUrl] = useState<string>("");
     const ref = useRef<HTMLButtonElement>(null);
 

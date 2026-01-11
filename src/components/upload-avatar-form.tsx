@@ -6,7 +6,6 @@ import uploadAvatarAction from "@/actions/upload-avatar";
 
 export default function UploadAvatarForm() {
     const [_, action] = useActionState(uploadAvatarAction, undefined);
-
     const inputRef = useRef<HTMLInputElement>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -15,7 +14,6 @@ export default function UploadAvatarForm() {
             <Button 
                 variant="outline" 
                 onClick={inputRef.current?.click} 
-                type="button"
             >
                 Upload image
             </Button>

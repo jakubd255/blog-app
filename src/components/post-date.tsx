@@ -1,3 +1,5 @@
+import { formatDate } from "@/lib/date";
+
 interface PostDateProps {
     date: Date;
 }
@@ -5,7 +7,7 @@ interface PostDateProps {
 export default function PostDate({date}: PostDateProps) {
     return(
         <span className="text-muted-foreground">
-            {date.toLocaleDateString()}
+            {formatDate(date)}
         </span>
     );
 }

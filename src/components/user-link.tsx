@@ -33,5 +33,5 @@ export default function UserLink({link}: UserLinkProps) {
                 {getIcon(link)}
             </Link>
         </Button>
-    )
+    );
 }

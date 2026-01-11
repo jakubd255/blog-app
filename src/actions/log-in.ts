@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import { createSession } from "@/lib/auth";
 import { validatePassword } from "@/lib/auth/password";
@@ -32,7 +32,6 @@ export default async function logInAction(_: unknown, data: FormData) {
     if(!validationResult.success) {
         return actionFailure(validationResult.error?.flatten().fieldErrors, formData);
     }
-
     const {email, password} = validationResult.data;
 
     const admin = await checkAdmin();

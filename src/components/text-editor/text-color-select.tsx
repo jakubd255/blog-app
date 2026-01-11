@@ -1,8 +1,7 @@
 import { Editor } from "@tiptap/react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Baseline } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectLabel, SelectTrigger } from "../ui/select";
-import { SelectGroup } from "@radix-ui/react-select";
+import { Select, SelectContent, SelectItem, SelectTrigger } from "../ui/select";
 
 export const TEXT_COLORS = [
     {name: "Default", value: "default"},

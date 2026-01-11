@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useActionState, useState } from "react";
+import { useActionState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -8,12 +8,7 @@ import updatePasswordAction from "@/actions/update-password";
 import FormSubmitError from "./form-submit-error";
 
 export default function UpdatePasswordForm() {
-    const [currentPassword, setCurrent] = useState<string>("");
-    const [newPassword, setNew] = useState<string>("");
-
-    const [state, action] = useActionState(async () => {
-        return await updatePasswordAction(currentPassword, newPassword);
-    }, undefined);
+    const [state, action] = useActionState(updatePasswordAction, undefined);
 
     return(
         <form action={action} className="flex flex-col gap-2">
@@ -21,17 +16,17 @@ export default function UpdatePasswordForm() {
                 <Label>
                     Current password
                 </Label>
-                <Input type="password" value={currentPassword} onChange={e => setCurrent(e.target.value)}/>
+                <Input type="password" name="currentPassword"/>
                 <FormSubmitError errors={state?.errors?.currentPassword}/>
             </div>
             <div>
                 <Label>
                     New password
                 </Label>
-                <Input type="password" value={newPassword} onChange={e => setNew(e.target.value)}/>
+                <Input type="password" name="newPassword"/>
                 <FormSubmitError errors={state?.errors?.newPassword}/>
             </div>
-            <Button>
+            <Button type="submit">
                 Update password
             </Button>
         </form>

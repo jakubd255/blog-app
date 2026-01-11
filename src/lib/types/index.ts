@@ -9,6 +9,8 @@ export interface Post {
     createdAt: Date;
 }
 
+export type Role = "ADMIN" | "USER";
+
 export interface User {
     id: number;
     name: string;
@@ -16,6 +18,6 @@ export interface User {
     profileImage?: string | null;
     links: string[] | null;
     bio?: string | null;
-    role: "ADMIN" | "USER";
+    role: Role;
     createdAt: Date;
 }

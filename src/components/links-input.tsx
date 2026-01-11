@@ -1,16 +1,18 @@
-"use client"
+"use client";
 
 import { Trash2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Dispatch, SetStateAction } from "react";
 
-interface UpdateLinksFormProps {
+interface LinksInput {
     links: string[];
     onChange: Dispatch<SetStateAction<string[]>>;
+    defaultValue?: string[];
+    name?: string;
 }
 
-export default function UpdateLinksForm({links, onChange}: UpdateLinksFormProps) {
+export default function LinksInput({links, onChange, name}: LinksInput) {
     const handleAddLink = () => {
         onChange(links => [...links, ""]);
     };
@@ -26,9 +28,9 @@ export default function UpdateLinksForm({links, onChange}: UpdateLinksFormProps)
             {links?.map((link: string, index: number) =>
                 <div className="flex gap-1" key={index}>
                     <Input
-                        name={index.toString()}
                         onChange={handleUpdateLink}
                         value={link}
+                        name={name}
                     />
                     <Button
                         variant="outline"
