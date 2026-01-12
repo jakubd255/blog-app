@@ -5,7 +5,7 @@ import { actionFailure } from "@/lib/action-result";
 import { validateRequest } from "@/lib/auth";
 import { isAdmin } from "@/lib/auth/permissions";
 import { Tag } from "emblor";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -47,6 +47,6 @@ export default async function upsertPostAction(id: number | null, title: string,
         await addPost(title, slug, content, isPublished, tags.map(tag => tag.text));
     }
 
-    revalidateTag("posts");
+    revalidatePath("/");
     redirect("/admin/posts");
 }

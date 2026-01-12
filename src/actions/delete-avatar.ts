@@ -5,6 +5,7 @@ import { deleteFile, isLocalFile } from "@/lib/file-handler";
 import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 import { validateRequest } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export default async function deleteAvatarAction() {
     const {user} = await validateRequest();
@@ -16,6 +17,6 @@ export default async function deleteAvatarAction() {
         deleteFile(user.profileImage);
     }
     await updateUser(user.id, {profileImage: null});
-
+    revalidatePath("/about");
     redirect("/admin/profile");
 }

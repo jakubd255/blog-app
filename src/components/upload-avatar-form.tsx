@@ -14,6 +14,7 @@ export default function UploadAvatarForm() {
             <Button 
                 variant="outline" 
                 onClick={inputRef.current?.click} 
+                type="button"
             >
                 Upload image
             </Button>

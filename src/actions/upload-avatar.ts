@@ -5,6 +5,7 @@ import { deleteFile, isLocalFile, uploadFile } from "@/lib/file-handler";
 import { actionFailure } from "@/lib/action-result";
 import { redirect } from "next/navigation";
 import { validateRequest } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 export default async function uploadAvatarAction(_: unknown, data: FormData) {
     const image = data.get("image") as File | null;
@@ -23,6 +24,6 @@ export default async function uploadAvatarAction(_: unknown, data: FormData) {
     }
 
     await updateUser(user.id, {profileImage: fileName});
-
+    revalidatePath("/about");
     redirect("/admin/profile");
 }

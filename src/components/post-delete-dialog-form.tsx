@@ -31,7 +31,7 @@ export default function PostDeleteDialogForm({post}: PostDeleteDialogProps) {
                     {post.title}
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">
+                            <Button variant="outline" type="button">
                                 Cancel
                             </Button>
                         </DialogClose>

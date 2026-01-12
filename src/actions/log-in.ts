@@ -32,6 +32,7 @@ export default async function logInAction(_: unknown, data: FormData) {
     if(!validationResult.success) {
         return actionFailure(validationResult.error?.flatten().fieldErrors, formData);
     }
+    
     const {email, password} = validationResult.data;
 
     const admin = await checkAdmin();

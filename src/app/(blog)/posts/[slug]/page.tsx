@@ -1,8 +1,9 @@
 import PostDate from "@/components/post-date";
 import PostTagsList from "@/components/post-tags-list";
 import { Button } from "@/components/ui/button";
-import { getPostBySlug } from "@/db/queries/posts";
+import { getCachedPostBySlug } from "@/lib/cache/posts";
 import { ArrowLeft } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -10,10 +11,18 @@ interface PostPageProps {
     params: Promise<{slug: string}>
 }
 
+export async function generateMetadata({params}: PostPageProps): Promise<Metadata> {
+    const {slug} = await params;
+    const post = await getCachedPostBySlug(slug);
+    if(!post) {
+        return {title: `Post not found - Blog App`};
+    }
+    return {title: `${post.title} - Blog App`};
+}
+
 export default async function PostPage({params}: PostPageProps) {
     const {slug} = await params;
-
-    const post = await getPostBySlug(slug);
+    const post = await getCachedPostBySlug(slug);
     if(!post) {
         notFound();
     }

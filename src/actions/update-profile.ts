@@ -3,6 +3,7 @@
 import { updateUser } from "@/db/queries/users";
 import { actionFailure } from "@/lib/action-result";
 import { validateRequest } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
@@ -25,6 +26,6 @@ export default async function updateProfileAction(name: string, bio: string, lin
     }
 
     await updateUser(user.id, {name, bio, links});
-    
+    revalidatePath("/about");
     redirect("/admin/profile");
 }

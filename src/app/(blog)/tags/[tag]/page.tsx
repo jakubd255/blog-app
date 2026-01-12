@@ -2,10 +2,16 @@ import PostListElement from "@/components/post-list-element";
 import { PaginationWithLinks } from "@/components/ui/pagination-with-links";
 import { Separator } from "@/components/ui/separator";
 import { getCachedPostsByTag } from "@/lib/cache/posts";
+import { Metadata } from "next";
 
 interface TagPageProps {
     params: Promise<{tag: string}>;
     searchParams: Promise<{page?: number}>;
+}
+
+export async function generateMetadata({params}: TagPageProps): Promise<Metadata> {
+    const {tag} = await params;
+    return {title: `#${tag} - Blog App`};
 }
 
 export default async function TagPage({params, searchParams}: TagPageProps) {

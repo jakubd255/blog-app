@@ -27,7 +27,7 @@ export default function DeleteAvatarDialogForm() {
                     </DialogHeader>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">
+                            <Button variant="outline" type="button">
                                 Cancel
                             </Button>
                         </DialogClose>

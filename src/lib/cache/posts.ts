@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
-import { getPublishedPosts, getPostsByTag } from "@/db/queries/posts";
+import { getPublishedPosts, getPostsByTag, getPostBySlug } from "@/db/queries/posts";
+import { cache } from "react";
 
 const settings = {tags: ["posts"], revalidate: 60};
 
@@ -14,3 +15,5 @@ export const getCachedPostsByTag = unstable_cache(
     ["posts-by-tag"],
     settings
 );
+
+export const getCachedPostBySlug = cache(getPostBySlug);

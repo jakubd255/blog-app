@@ -31,7 +31,9 @@ export default function PostForm({post, editMode=false}: PostFormProps) {
         if(event.key === "Enter") event.preventDefault();
     };
 
-    const [state, action] = useActionState(upsertPostAction.bind(null, post?.id ?? null, title, slug, content, isPublished, tags), undefined);
+    const [state, action] = useActionState(async () => {
+        return upsertPostAction(post?.id ?? null, title, slug, content, isPublished, tags);
+    }, undefined);
 
     return(
         <form 
@@ -59,7 +61,7 @@ export default function PostForm({post, editMode=false}: PostFormProps) {
                         onChange={e => setSlug(e.target.value)} 
                         name="slug"
                     />
-                    <Button variant="outline" onClick={handleSetSlug}>
+                    <Button variant="outline" onClick={handleSetSlug} type="button">
                         Generate
                     </Button>
                 </div>

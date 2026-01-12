@@ -4,7 +4,7 @@ import { deletePostById } from "@/db/queries/posts";
 import { actionFailure } from "@/lib/action-result";
 import { validateRequest } from "@/lib/auth";
 import { isAdmin } from "@/lib/auth/permissions";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 export default async function deletePostAction(id: number) {
@@ -14,6 +14,6 @@ export default async function deletePostAction(id: number) {
     }
 
     await deletePostById(id);
-    revalidateTag("posts");
+    revalidatePath("/");
     redirect("/admin/posts");
 }

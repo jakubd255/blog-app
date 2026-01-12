@@ -2,7 +2,12 @@ import AdminSidebar from "@/components/admin-sidebar";
 import { SessionProvider } from "@/components/providers/session-provider";
 import { validateRequest } from "@/lib/auth";
 import { isAdmin } from "@/lib/auth/permissions";
+import { Metadata } from "next";
 import { forbidden, redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+    title: "Admin Dashboard - Blog App"
+};
 
 export default async function AdminLayout({children}: Readonly<{children: React.ReactNode}>) {
     const {session, user} = await validateRequest();
