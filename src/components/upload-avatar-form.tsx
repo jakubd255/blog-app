@@ -13,7 +13,7 @@ export default function UploadAvatarForm() {
         <form action={action} ref={formRef}>
             <Button 
                 variant="outline" 
-                onClick={inputRef.current?.click} 
+                onClick={() => inputRef.current?.click()} 
                 type="button"
             >
                 Upload image
