@@ -10,7 +10,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const schema = z.object({
-    id: z.number().nullable().optional(),
+    id: z.coerce.number().nullable().optional(),
     title: z.string().trim().min(1),
     slug: z.string().trim().min(1),
     content: z.string().trim().min(1),
@@ -35,7 +35,7 @@ export default async function upsertPostAction(id: number | null, title: string,
 
     const post = await getPostBySlug(slug);
 
-    const isSlugTaken = id ? post?.id !== id : !!post;
+    const isSlugTaken = !!post && (!id || post.id != id);
     if(isSlugTaken) {
         return actionFailure({slug: ["This slug is taken"]});
     }
